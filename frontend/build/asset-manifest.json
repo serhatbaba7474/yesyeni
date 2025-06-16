@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c5230c7a.css",
+    "main.js": "/static/js/main.df05a158.js",
+    "static/js/398.b065b0b2.chunk.js": "/static/js/398.b065b0b2.chunk.js",
+    "static/js/527.40304dde.chunk.js": "/static/js/527.40304dde.chunk.js",
+    "static/js/881.12a5ac27.chunk.js": "/static/js/881.12a5ac27.chunk.js",
+    "static/media/iscep-logo.png": "/static/media/iscep-logo.9e455838b6dd42e72a34.png",
+    "index.html": "/index.html",
+    "main.c5230c7a.css.map": "/static/css/main.c5230c7a.css.map",
+    "main.df05a158.js.map": "/static/js/main.df05a158.js.map",
+    "398.b065b0b2.chunk.js.map": "/static/js/398.b065b0b2.chunk.js.map",
+    "527.40304dde.chunk.js.map": "/static/js/527.40304dde.chunk.js.map",
+    "881.12a5ac27.chunk.js.map": "/static/js/881.12a5ac27.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c5230c7a.css",
+    "static/js/main.df05a158.js"
+  ]
+}
