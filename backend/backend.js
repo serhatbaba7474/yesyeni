@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'development' ? '*' : 'https://yesyeni-qmos-g0knswgtf-haskeryas-projects.vercel.app',
+  origin: process.env.NODE_ENV === 'development' ? '*' : 'https://yesyeni-722j.vercel.app/',
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
