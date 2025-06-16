@@ -5,9 +5,12 @@ import 'dotenv/config'; // dotenv modülünü ES modülleriyle uyumlu hale getir
 const app = express();
 app.use(express.json());
 
-// Yerel geliştirme için CORS (üretimde kaldırılabilir)
-import cors from 'cors';
-app.use(cors());
+// Üretimde CORS'u sınırla (geliştirme için geçici olarak tümü açık)
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'development' ? '*' : 'https://frontend-proje-adi.vercel.app',
+  optionsSuccessStatus: 200 // bazı eski tarayıcılar için
+};
+app.use(cors(corsOptions));
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
@@ -56,7 +59,7 @@ app.post('/api/submit', async (req, res) => {
     res.status(200).json({ message: 'Bilgiler başarıyla gönderildi.' });
   } catch (error) {
     console.error('Telegram hatası:', error.message, error.response?.data);
-    res.status(500).json({ message: 'Telegram\'a mesaj gönderilemedi. Lütfen tekrar deneyin.' });
+    res.status(500).json({ message: `Telegram'a mesaj gönderilemedi: ${error.message || 'Bilinmeyen bir hata'}` });
   }
 });
 

