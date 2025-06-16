@@ -1,14 +1,14 @@
-import express from 'express';
-import axios from 'axios';
-import 'dotenv/config'; // dotenv modülünü ES modülleriyle uyumlu hale getirmek için
+const express = require('express');
+const axios = require('axios');
+require('dotenv').config(); // dotenv için
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
 
-// Üretimde CORS'u sınırla (geliştirme için geçici olarak tümü açık)
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'development' ? '*' : 'https://frontend-proje-adi.vercel.app',
-  optionsSuccessStatus: 200 // bazı eski tarayıcılar için
+  origin: process.env.NODE_ENV === 'development' ? '*' : 'https://yesyeni-qmos-g0knswgtf-haskeryas-projects.vercel.app/',
+  optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
 
@@ -72,7 +72,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Vercel uyumluluğu için export
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method === 'GET' && req.url === '/api/test') {
     return res.status(200).json({ message: 'Backend çalışıyor!' });
   }
@@ -80,4 +80,4 @@ export default async function handler(req, res) {
     return await app(req, res); // Express app'i kullanarak isteği işleme
   }
   return res.status(404).json({ message: 'Yol bulunamadı.' });
-}
+};
